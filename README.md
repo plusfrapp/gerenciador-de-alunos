@@ -62,7 +62,9 @@ Bash
 
 
 git clone [https://github.com/plusfrapp/gerenciador-de-alunos-LPP.git](https://github.com/plusfrapp/gerenciador-de-alunos-LPP.git)
+
 cd gerenciador-de-alunos-LPP
+
 Executar o ficheiro principal:
 
 Bash
