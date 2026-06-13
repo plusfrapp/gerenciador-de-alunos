@@ -50,3 +50,24 @@ A ligação ao SQLite foi projetada para garantir total fiabilidade:
 │   ├── aluno_repo.py        # Consultas e manipulações CRUD de alunos
 │   └── professor_repo.py    # Consultas e manipulações CRUD de professores e vínculos
 └── escola.db                # Ficheiro da base de dados local (Gerado automaticamente)
+
+```
+
+🚀 Como Executar o Projeto
+Pré-requisitos: Certifique-se de ter o Python 3 instalado no seu computador. O projeto utiliza apenas bibliotecas nativas, dispensando instalações externas.
+
+Clonar o repositório:
+
+Bash
+
+
+git clone [https://github.com/plusfrapp/gerenciador-de-alunos-LPP.git](https://github.com/plusfrapp/gerenciador-de-alunos-LPP.git)
+cd gerenciador-de-alunos-LPP
+Executar o ficheiro principal:
+
+Bash
+
+
+python main.py
+
+Desenvolvido com dedicação para facilitar a gestão do ambiente escolar.
