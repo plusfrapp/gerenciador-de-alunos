@@ -1,6 +1,6 @@
 import time
 from database.conexao import inicializar_banco, fechar_conexao
-from repository import aluno_repo
+from repository import aluno_repo, professor_repo
 
 # ── CONSTANTES ──────────────────────────────────────────────────────────────
 
@@ -70,8 +70,9 @@ def menu_principal() -> str:
     print("         SISTEMA DE GESTÃO ESCOLAR")
     print("=" * 52)
     print("  1. 👤  Gerenciar Alunos")
-    print("  2. 📝  Lançar Notas")
-    print("  3. 📊  Relatórios")
+    print("  2. 👨‍🏫  Gerenciar Professores")
+    print("  3. 📝  Lançar Notas")
+    print("  4. 📊  Relatórios")
     print("  0. 💾  Sair")
     print("=" * 52)
     return input("  Opção: ").strip()
@@ -83,6 +84,18 @@ def submenu_alunos() -> str:
     print("  1. Adicionar Aluno")
     print("  2. Remover Aluno")
     print("  3. Listar Alunos de uma Turma")
+    print("  0. ← Voltar")
+    print("─" * 36)
+    return input("  Opção: ").strip()
+
+def submenu_professores() -> str:
+    print("\n" + "─" * 36)
+    print("  [ GERENCIAR PROFESSORES ]")
+    print("─" * 36)
+    print("  1. Adicionar Professor")
+    print("  2. Remover Professor")
+    print("  3. Vincular Professor a uma Turma")
+    print("  4. Listar Professores por Turma")
     print("  0. ← Voltar")
     print("─" * 36)
     return input("  Opção: ").strip()
@@ -128,6 +141,58 @@ def fluxo_alunos():
             serie, turma = selecionar_serie_turma()
             alunos = aluno_repo.listar_por_turma(serie, turma)
             _imprimir_lista_simples(alunos, serie, turma)
+
+        elif op == '0':
+            break
+        else:
+            print("  ❌ Opção inválida.")
+
+def fluxo_professores():
+    while True:
+        op = submenu_professores()
+
+        if op == '1':
+            print("\n  ── Adicionar Professor ──")
+            nome = pedir_texto("  Nome do Professor: ")
+            ok, msg = professor_repo.adicionar_professor(nome)
+            print(f"  {'✅' if ok else '❌'} {msg}")
+
+        elif op == '2':
+            print("\n  ── Remover Professor ──")
+            profs = professor_repo.listar_todos()
+            if not profs:
+                print("  ℹ️  Nenhum professor cadastrado.")
+            else:
+                _imprimir_lista_professores_simples(profs)
+                prof_id = pedir_id("  ID do professor a remover: ")
+                ok, msg = professor_repo.remover_professor(prof_id)
+                print(f"  {'✅' if ok else '❌'} {msg}")
+
+        elif op == '3':
+            print("\n  ── Vincular Professor a uma Turma ──")
+            profs = professor_repo.listar_todos()
+            if not profs:
+                print("  ℹ️  Cadastre um professor primeiro.")
+                continue
+            _imprimir_lista_professores_simples(profs)
+            prof_id = pedir_id("  ID do professor: ")
+            serie, turma = selecionar_serie_turma()
+            ok, msg = professor_repo.vincular_turma(prof_id, serie, turma)
+            print(f"  {'✅' if ok else '❌'} {msg}")
+
+        elif op == '4':
+            print("\n  ── Listar Professores por Turma ──")
+            serie, turma = selecionar_serie_turma()
+            profs = professor_repo.listar_por_turma(serie, turma)
+            separador()
+            print(f"  Turma: {serie}º ano {turma}  |  Professores vinculados:")
+            separador()
+            if profs:
+                for p in profs:
+                    print(f"  ID {p['id']:<6} {p['nome']}")
+            else:
+                print("  ℹ️  Nenhum professor vinculado a esta turma.")
+            separador()
 
         elif op == '0':
             break
@@ -208,9 +273,24 @@ def _imprimir_lista_simples(alunos: list, serie: int, turma: str):
         print("  ℹ️  Nenhum aluno cadastrado nesta turma.")
     separador()
 
+def _imprimir_lista_professores_simples(professores: list):
+    separador()
+    print(f"  Professores Cadastrados: {len(professores)}")
+    separador()
+    print(f"  {'ID':<6} {'Nome':<28} Turmas Lecionadas")
+    separador('·')
+    for p in professores:
+        turmas = professor_repo.listar_turmas_do_professor(p['id'])
+        t_str = ", ".join([f"{t['serie']}º{t['turma']}" for t in turmas]) if turmas else "Nenhuma"
+        print(f"  {p['id']:<6} {p['nome']:<28} {t_str}")
+    separador()
+
 def _imprimir_relatorio_notas(alunos: list, serie: int, turma: str, contagem: dict):
     separador('═')
+    profs = professor_repo.listar_por_turma(serie, turma)
+    prof_nomes = ", ".join([p['nome'] for p in profs]) if profs else "Nenhum vinculado"
     print(f"  RELATÓRIO — {serie}º ano | Turma {turma}  |  {len(alunos)}/30 alunos")
+    print(f"  👨‍🏫 Professor(es): {prof_nomes}")
     separador('═')
     if alunos:
         print(f"  {'ID':<5} {'Nome':<28} {'P1':>5} {'P2':>5} {'Média':>6}  Situação")
@@ -243,8 +323,10 @@ def main():
             if op == '1':
                 fluxo_alunos()
             elif op == '2':
-                fluxo_notas()
+                fluxo_professores()
             elif op == '3':
+                fluxo_notas()
+            elif op == '4':
                 fluxo_relatorios()
             elif op == '0':
                 print("\n  💾 Salvando dados...")
