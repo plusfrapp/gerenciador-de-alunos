@@ -53,7 +53,8 @@ A ligação ao SQLite foi projetada para garantir total fiabilidade:
 
 ```
 
-🚀 Como Executar o Projeto
+## 🚀 Como Executar o Projeto
+
 Pré-requisitos: Certifique-se de ter o Python 3 instalado no seu computador. O projeto utiliza apenas bibliotecas nativas, dispensando instalações externas.
 
 Clonar o repositório:
