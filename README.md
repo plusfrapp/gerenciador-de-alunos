@@ -1,5 +1,5 @@
-with open('README.md', 'w', encoding='utf-8') as f:
-    f.write("""# 🎓 Sistema de Gestão Escolar (CLI)
+
+## 🎓 Sistema de Gestão Escolar (CLI)
 
 Um sistema de gestão escolar via Linha de Comandos (CLI) desenvolvido em Python e SQLite. O projeto permite gerir alunos, professores, turmas, lançar notas e gerar relatórios académicos de forma rápida e eficiente.
 
