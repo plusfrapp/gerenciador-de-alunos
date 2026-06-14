@@ -1,6 +1,14 @@
 
 ## Sistema de Gestão Escolar (CLI)
 
+## 🧠 Fundamentação Teórica & Decisões de Projeto
+
+Este projeto foi estruturado seguindo rigorosamente os seguintes pilares acadêmicos e técnicos:
+
+* **Paradigma Orientado a Banco de Dados (Database-driven Programming):** A lógica principal do sistema é ditada pela estrutura das informações e operações de persistência (CRUD) via SQL, e não por fluxos lógicos rígidos no código. As regras de negócio (como limites de notas e restrições) são controladas diretamente no banco.
+* **Tecnologias (Python + SQLite):** O **Python** atua na orquestração e interface, enquanto o **SQLite** gerencia os dados de forma nativa e sem a necessidade de servidores externos complexos, garantindo máxima portabilidade para esta microaplicação.
+* **Conformidade ACID e Integridade:** A escolha do SQLite garante transações robustas baseadas nas propriedades **ACID** (Atomicidade, Consistência, Isolamento e Durabilidade). Isso assegura a integridade referencial do sistema acadêmico, impedindo, por exemplo, inconsistências nos vínculos entre alunos, professores e turmas.
+
 Um sistema de gestão escolar via Linha de Comandos (CLI) desenvolvido em Python e SQLite. O projeto permite gerir alunos, professores, turmas, lançar notas e gerar relatórios académicos de forma rápida e eficiente.
 
 ## Funcionalidades
