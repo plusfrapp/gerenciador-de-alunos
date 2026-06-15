@@ -1,7 +1,16 @@
+# Sistema de Gerenciamento de Alunos (Microaplicação CLI)
 
-## Sistema de Gestão Escolar (CLI)
+**Disciplina:** Linguagens e Paradigmas da Programação (LPP)  
 
-## 🧠 Fundamentação Teórica & Decisões de Projeto
+**Integrantes:**
+* Felipe Gonçalves Vidal
+* Rafael José de Souza Marques
+* Robert Francisco Taveira
+* Paulo de Tarso Rezende Lôbo
+
+---
+
+## Fundamentação Teórica & Decisões de Projeto
 
 Este projeto foi estruturado seguindo rigorosamente os seguintes pilares acadêmicos e técnicos:
 
@@ -9,45 +18,40 @@ Este projeto foi estruturado seguindo rigorosamente os seguintes pilares acadêm
 * **Tecnologias (Python + SQLite):** O **Python** atua na orquestração e interface, enquanto o **SQLite** gerencia os dados de forma nativa e sem a necessidade de servidores externos complexos, garantindo máxima portabilidade para esta microaplicação.
 * **Conformidade ACID e Integridade:** A escolha do SQLite garante transações robustas baseadas nas propriedades **ACID** (Atomicidade, Consistência, Isolamento e Durabilidade). Isso assegura a integridade referencial do sistema acadêmico, impedindo, por exemplo, inconsistências nos vínculos entre alunos, professores e turmas.
 
-Um sistema de gestão escolar via Linha de Comandos (CLI) desenvolvido em Python e SQLite. O projeto permite gerir alunos, professores, turmas, lançar notas e gerar relatórios académicos de forma rápida e eficiente.
+---
 
-## Funcionalidades
+## Sobre o Sistema (Gestão Escolar)
 
-O sistema está dividido em quatro módulos principais:
+Um sistema de gestão escolar via Linha de Comandos (CLI) desenvolvido em Python e SQLite. O projeto permite gerir alunos, professores, turmas, lançar notas e gerar relatórios acadêmicos de forma rápida e eficiente.
 
-### 1. Gestão de Alunos
+### Funcionalidades (Módulos Principais)
+
+**1. Gestão de Alunos**
 * **Adicionar Aluno:** Registo de alunos definindo Nome, Ano (1º, 2º ou 3º) e Turma (A ou B).
 * **Limite por Turma:** Validação automática que impede o registo de mais de 30 alunos por turma.
 * **Remover Aluno:** Exclusão de registos através do ID único do aluno.
 * **Listagem:** Visualização rápida de todos os alunos de uma turma específica.
 
-### 2. Gestão de Professores
+**2. Gestão de Professores**
 * **Adicionar/Remover Professor:** Registo e exclusão de docentes no sistema.
 * **Vincular a Turmas:** Associação de professores a turmas específicas (relação N:M), permitindo que um professor lecione a várias turmas simultaneamente.
 * **Listagem:** Visualização dos professores alocados a uma determinada turma.
 
-### 3. Lançamento de Notas
+**3. Lançamento de Notas**
 * Lançamento das notas **P1** e **P2** (valores de 0.0 a 10.0).
 * **Cálculo Automático de Situação:** O sistema calcula a média do aluno assim que as duas notas são lançadas. Se a média for $\ge 5.0$, a situação é atualizada para "Aprovado"; caso contrário, "Reprovado". Se faltar alguma nota, permanece como "Cursando".
 
-### 4. Relatórios
+**4. Relatórios**
 * **Notas e Situação:** Exibe o boletim completo da turma, incluindo os professores responsáveis associados a essa turma, e um resumo das aprovações/reprovações.
 * **Média Geral:** Calcula e exibe a média geral da turma (considerando apenas alunos com ambas as notas lançadas).
 * **Pendências:** Lista rapidamente os alunos que ainda estão sem notas lançadas no sistema.
 
-## Tecnologias e Arquitetura
+---
 
-* **Linguagem:** Python 3.x
-* **Base de Dados:** SQLite3
-* **Paradigma:** Orientado a Base de Dados (Database-driven Programming) integrado com o Padrão Repository, separando a lógica de acesso a dados da interface do utilizador.
+## Arquitetura e Estrutura de Arquivos
 
-### Otimizações e Integridade (ACID)
-A ligação ao SQLite foi projetada para garantir total fiabilidade:
-* **Transações Seguras:** Utilização do modo `WAL` (Write-Ahead Logging).
-* **Integridade Referencial:** Chaves estrangeiras (Foreign Keys) ativadas. Se um professor for removido, a regra `ON DELETE CASCADE` garante que os seus vínculos com as turmas também sejam eliminados automaticamente.
-* **Índices de Performance:** Criação de índices customizados (ex: `idx_alunos_serie_turma`) para otimizar as pesquisas frequentes.
-
-## Estrutura de Ficheiros
+* **Paradigma:** Orientado a Base de Dados integrado com o Padrão Repository, separando a lógica de acesso a dados da interface do utilizador.
+* **Otimizações:** Transações seguras via `WAL` (Write-Ahead Logging), Chaves Estrangeiras ativadas (`ON DELETE CASCADE`) e Índices de Performance customizados.
 
 ```text
 ├── main.py                  # Ponto de entrada, menus CLI e fluxos do utilizador
@@ -65,19 +69,23 @@ A ligação ao SQLite foi projetada para garantir total fiabilidade:
 
 Pré-requisitos: Certifique-se de ter o Python 3 instalado no seu computador. O projeto utiliza apenas bibliotecas nativas, dispensando instalações externas.
 
-Clonar o repositório:
+1. **Clonar o repositório:**
 
-Bash
+```bash
+git clone https://github.com/plusfrapp/gerenciador-de-alunos
 
+```
 
-git clone [https://github.com/plusfrapp/gerenciador-de-alunos-LPP.git](https://github.com/plusfrapp/gerenciador-de-alunos-LPP.git)
+2. **Entrar na pasta:**
 
+```bash
 cd gerenciador-de-alunos-LPP
 
-Executar o ficheiro principal:
+```
 
-Bash
+3. **Executar:**
 
-
+```bash
 python3 main.py
 
+```
