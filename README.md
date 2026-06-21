@@ -39,7 +39,7 @@ Um sistema de gestão escolar via Linha de Comandos (CLI) desenvolvido em Python
 
 **3. Lançamento de Notas**
 * Lançamento das notas **P1** e **P2** (valores de 0.0 a 10.0).
-* **Cálculo Automático de Situação:** O sistema calcula a média do aluno assim que as duas notas são lançadas. Se a média for $\ge 5.0$, a situação é atualizada para "Aprovado"; caso contrário, "Reprovado". Se faltar alguma nota, permanece como "Cursando".
+* **Cálculo Automático de Situação:** O sistema calcula a média do aluno assim que as duas notas são lançadas. Se a média for >= 5.0, a situação é atualizada para "Aprovado"; caso contrário, "Reprovado". Se faltar alguma nota, permanece como "Cursando".
 
 **4. Relatórios**
 * **Notas e Situação:** Exibe o boletim completo da turma, incluindo os professores responsáveis associados a essa turma, e um resumo das aprovações/reprovações.
